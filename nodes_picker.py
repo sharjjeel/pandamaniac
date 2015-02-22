@@ -57,10 +57,16 @@ elif not highest_degree:
 		for i in intersect_not_top:
 			otpt_list.append(i)
 			left_seeds = left_seeds - 1
-		highest_degree_plus_left_seeds = c.most_common(num_seeds + left_seeds)
+		highest_degree_plus_left_seeds = c.most_common(2*num_seeds)
 		items = highest_degree_plus_left_seeds
-		for i in range(left_seeds):
-			otpt_list.append(items[num_seeds+ i][0])
+		i = 0
+		while left_seeds >= 0:
+			if items[num_seeds/2+ i][0] not in otpt_list:
+				otpt_list.append(items[num_seeds/2+ i][0])
+				i = i + 1
+				left_seeds = left_seeds - 1
+			else:
+				i = i+1
 
 output = 'upload.txt'
 f = open(output, 'w')
