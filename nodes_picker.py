@@ -6,6 +6,7 @@ import random
 import collections
 
 filename = sys.argv[1]
+num_tries = int(sys.argv[2])
 num_players, num_seeds, unique_id, j= filename.split('.')
 num_seeds = int(num_seeds)
 
@@ -49,10 +50,11 @@ elif not highest_degree:
 
 	if len(intersect_not_top) >= left_seeds:
 		i = 0
-		while left_seeds>=0:
+		while left_seeds>0:
 			otpt_list.append(intersect_not_top[i])
 			i = i+1
 			left_seeds = left_seeds - 1
+
 	else:
 		for i in intersect_not_top:
 			otpt_list.append(i)
@@ -60,7 +62,8 @@ elif not highest_degree:
 		highest_degree_plus_left_seeds = c.most_common(2*num_seeds)
 		items = highest_degree_plus_left_seeds
 		i = 0
-		while left_seeds >= 0:
+
+		while left_seeds > 0:
 			if items[num_seeds/2+ i][0] not in otpt_list:
 				otpt_list.append(items[num_seeds/2+ i][0])
 				i = i + 1
@@ -71,7 +74,7 @@ elif not highest_degree:
 output = 'upload.txt'
 f = open(output, 'w')
 nodes = G.nodes()
-for a in range(50):
+for a in range(num_tries):
 	for b in otpt_list:
 		f.write(b+'\n')
 f.close()
